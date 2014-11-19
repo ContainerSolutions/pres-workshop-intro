@@ -5,12 +5,12 @@ http.createServer(function (req, result) {
 	
 	var log = function() {
 		var logMessage = "Nov 19 11:07:58 Node JS request received\n";
-	        fs.appendFile("/var/log/node/node_webapp.log", logMessage, function(err) {
-		        if (err) {
-	        		console.log(err);
-	        	} else {
-	              		console.log("The file was saved!");
-														                }
+		fs.appendFile("/var/log/node/node_webapp.log", logMessage, function(err) {
+			if (err) {
+				console.log(err);
+			} else {
+	       			console.log("The file was saved!");
+			}
 		});
 	};
 
@@ -52,17 +52,6 @@ http.createServer(function (req, result) {
 
         }).end();
 	
-
-	var logMessage = "Nov 19 11:07:58 Node JS request received\n";
-	fs.appendFile("/var/log/node/node_webapp.log", logMessage, function(err) {
-		if (err) {
-			console.log(err);
-		} else {
-			console.log("The file was saved!");
-		}
-	}); 
-	result.writeHead(200, {'Content-Type': 'text/plain'});
-	result.end('Hello World\n');
 }).listen(1337, '0.0.0.0');
 
 console.log('Server running at http://0.0.0.0:1337/');
