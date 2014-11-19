@@ -2,8 +2,19 @@ var fs = require('fs');
 var http = require('http');
 
 http.createServer(function (req, result) {
+	
+	var log = function() {
+		var logMessage = "Nov 19 11:07:58 Node JS request received\n";
+	        fs.appendFile("/var/log/node/node_webapp.log", logMessage, function(err) {
+		        if (err) {
+	        		console.log(err);
+	        	} else {
+	              		console.log("The file was saved!");
+														                }
+		});
+	};
 
-/*	var options = {
+	var options = {
                 host: 'es',
                 port: 9200,
                 path: '/crm/people/_search?q=importance:high',
@@ -19,6 +30,11 @@ http.createServer(function (req, result) {
                         data_string += chunk;
                 });
                 res.on('end', function () {
+			
+			log();
+
+
+
                         console.log(data_string);
 
                         var data = JSON.parse(data_string);
@@ -35,7 +51,7 @@ http.createServer(function (req, result) {
                 });
 
         }).end();
-	*/
+	
 
 	var logMessage = "Nov 19 11:07:58 Node JS request received\n";
 	fs.appendFile("/var/log/node/node_webapp.log", logMessage, function(err) {
