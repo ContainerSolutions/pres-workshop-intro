@@ -1,4 +1,4 @@
-FROM debian:wheezy
+FROM ubuntu
 
 MAINTAINER Container Solutions <info@container-solutions.com>
 
