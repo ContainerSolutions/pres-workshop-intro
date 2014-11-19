@@ -108,6 +108,8 @@ p.s. you will not be able to connect to localhost in the container, so listen on
 docker inspect
 </code></pre>
 
+http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
+
 docker run --rm -it --link es:es ubuntu /bin/bash
 
 env
