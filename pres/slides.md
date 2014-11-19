@@ -1,4 +1,12 @@
-# Basic docker commands
+## Before we start with Docker
+
+- Checkout https://github.com/ContainerSolutions/pres-workshop-intro.git
+- Setup vagrant to use at least 2 GB
+- Group up: javascript (nodejs), bash, common sense
+
+---
+
+# Basic docker commands (Ex. 0)
 
 -
 
@@ -73,6 +81,7 @@ docker stop</code></pre>
 ## Using commit, demo
 <br/>
 
+- diff
 - commit
 - push
 - pull
@@ -81,9 +90,20 @@ docker stop</code></pre>
 
 ## Using a Dockerfile
 
-<pre><code>FROM ubuntu / ubuntu:14.04
+<pre><code># compile time
+FROM ubuntu / ubuntu:14.04
 MAINTAINER Quinten Krijger
+RUN apt-get update && apt-get install -y curl
+ADD <src> <dst>
+
+# run time (meta data)
+EXPOSE 8080
+CMD /bin/start.sh
 </code></pre>
+
+<br/>
+
+<pre><code>docker inspect</code></pre>
 
 -
 
@@ -99,42 +119,84 @@ Create a containerized nodejs hello world application and visit it in your brows
 
 <br/>
 
-p.s. you will not be able to connect to localhost in the container, so listen on 0.0.0.0
-
-
--
-
-<pre><code>docker run --name es -d dockerfile/elasticsearch
-docker inspect
-</code></pre>
-
-http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-search.html
-
-docker run --rm -it --link es:es ubuntu /bin/bash
-
-env
-
-curl -XPUT 'http://localhost:9200/twitter/tweet/1' -d '{
-    "name" : "claudius",
-    "post_date" : "2014-11-15T14:12:12",
-    "message" : "boo!"
-}'
-
-curl -XPUT 'http://172.17.0.114:9200/twitter/tweet/1' -d '{
-    "name" : "claudius",
-    "post_date" : "2014-11-15T14:12:12",
-    "message" : "boo!"
-}'
-
-apt-get update && apt-get install curl
-curl -XPUT 'http://es:9200/twitter/tweet/1' -d '{
-    "name" : "container_writer_bot",
-    "post_date" : "2014-11-15T14:12:12",
-    "message" : "message"
-}'
+p.s. you will not be able to connect to localhost in the container from the host, so listen on 0.0.0.0
 
 ---
 
-## More resources
+## Linking containers
+
+-
+
+<pre><code>docker run --name my_name -d image_1 command
+docker run --link my_name:expected_name -d image_2 command</code></pre>
+
+## Exercise 2.alpha
+
+- Run dockerfile/elasticsearch
+- Run a container that links to it with /bin/bash and check output of "env"
+- Create an important person (ES has startup time)
+- Query for important persons
+- Query for important persons from the 2nd container, using the dns entry
+
+<pre><code>curl -XPUT 'http://localhost:9200/crm/people/1' -d '{
+    "name" : "claudius",
+    "importance" : "high"
+}'</code></pre>
+
+<pre><code>curl -XGET 'http://localhost:9200/crm/people/_search?q=importance:high'</code></pre>
+
+-
+
+## Exercise 2
+
+- Update your node image to retrieve data from elasticsearch
+- Use that in the page
+
+Resource
+
+- http://nodejs.org/api/http.html#http_http_request_options_callback
+
+---
+
+## Volumes
+
+### data containers
+
+-
+
+Exercise 3
+
+- Create a named data container for some directory and run it.
+- Update your node to log a syslog-like statement each request to a file in that directory.
+- Run node with --volumes-from the data container
+- Verify the logfile is updated on requests
+
+Resource
+
+- http://nodejs.org/api/fs.html#fs_fs_appendfilesync_filename_data_options
+
+---
+
+Exercise 4
+
+- Start ELK container
+- Find the IP address of the ELK container
+- Visit Kibana dashboard (ELK:80)
+- Create a container that can read logfiles and push it to Logstash (ELK:5000)
+
+Resources
+
+- do NOT use linking
+- docker run -e "key=value" image
+- nc IP:PORT data
+- tail -f dir/*.log
+
+---
+
+
+
+---
+
+# Do not be a stranger
 - Docker weekly
 - 
