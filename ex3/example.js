@@ -3,13 +3,14 @@ var http = require('http');
 
 http.createServer(function (req, result) {
 
-	var options = {
+/*	var options = {
                 host: 'es',
                 port: 9200,
                 path: '/crm/people/_search?q=importance:high',
                 method: 'GET'
         };
 
+	
         http.request(options, function(res) {
                 res.setEncoding('utf8');
                 var data_string = '';
@@ -34,8 +35,9 @@ http.createServer(function (req, result) {
                 });
 
         }).end();
+	*/
 
-	var logMessage = "Nov 19 11:07:58 Node JS request received";
+	var logMessage = "Nov 19 11:07:58 Node JS request received\n";
 	fs.appendFile("/var/log/node/node_webapp.log", logMessage, function(err) {
 		if (err) {
 			console.log(err);
@@ -43,6 +45,8 @@ http.createServer(function (req, result) {
 			console.log("The file was saved!");
 		}
 	}); 
+	result.writeHead(200, {'Content-Type': 'text/plain'});
+	result.end('Hello World\n');
 }).listen(1337, '0.0.0.0');
 
 console.log('Server running at http://0.0.0.0:1337/');
