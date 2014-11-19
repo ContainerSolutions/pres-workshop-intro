@@ -1,12 +1,31 @@
-## Before we start with Docker
+# Docker workshop
 
-- Checkout https://github.com/ContainerSolutions/pres-workshop-intro.git
-- Setup vagrant to use at least 2 GB
-- Group up: javascript (nodejs), bash, common sense
+Quinten Krijger
+
+Jaroslav Holub
+
+[Container Solutions]
 
 ---
 
-# Basic docker commands (Ex. 0)
+## Before we start with Docker
+
+- Checkout https://github.com/ContainerSolutions/pres-workshop-intro.git
+- Setup VM to use at least 2 GB
+- Group up: javascript (nodejs), linux, common sense
+
+---
+
+## Docker
+
+### Real Devops, deliver deployables
+### Resource optimization
+### Isolation (microservice mindset)
+### NO multi-server orchestration etc.
+
+---
+
+# Basic commands (Ex. 0)
 
 -
 
@@ -94,7 +113,7 @@ docker stop</code></pre>
 FROM ubuntu / ubuntu:14.04
 MAINTAINER Quinten Krijger
 RUN apt-get update && apt-get install -y curl
-ADD <src> <dst>
+ADD src dst
 
 # run time (meta data)
 EXPOSE 8080
@@ -103,23 +122,24 @@ CMD /bin/start.sh
 
 <br/>
 
-<pre><code>docker inspect</code></pre>
+Demo
 
 -
 
 ## Exercise 1
 <br/>
-Create a containerized nodejs hello world application and visit it in your browser.
+
+- Create a containerized nodejs hello world application
+- Use a Dockerfile
+- Use downloaded docker image "node"
+- Start (with --name) and visit it in your browser
 
 <br/>
 
-- see nodejs.org
-- use the downloaded base image "node"
-- use a Dockerfile and name your image
+### Resources
 
-<br/>
-
-p.s. you will not be able to connect to localhost in the container from the host, so listen on 0.0.0.0
+- see nodejs.org for an hello world example
+- you will not be able to connect to localhost in the container from the host, so listen on 0.0.0.0
 
 ---
 
@@ -193,10 +213,8 @@ Resources
 
 ---
 
+## Do not be a stranger
 
-
----
-
-# Do not be a stranger
-- Docker weekly
-- 
+- Twitter: @qkrijger, @containersoluti
+- LinkedIn
+- Blogs at containersol.com
