@@ -9,6 +9,7 @@
 docker pull node
 docker pull ubuntu
 docker pull quintenk/small
+docker pull smatochkin/elk
 </code></pre>
 
 ### Check out the images present on the host
