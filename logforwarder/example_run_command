@@ -1,0 +1,1 @@
+docker run --name logger -v $(pwd):/logs -e "LOGDIR=/logs" -e "ELK_IP=172.17.0.149" --rm -it quintenk/logforwarder
