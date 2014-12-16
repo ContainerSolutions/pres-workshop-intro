@@ -1,4 +1,5 @@
 var config = {
     author: "Quinten Krijger",
-    twitter: "qkrijger"
+    twitter: "qkrijger",
+    logo: "pres/logo.png"
 };
